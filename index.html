@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Gift Card X-change</title>
+  <link rel="stylesheet" type="text/css" href="lib/bower_components/bootstrap/dist/css/bootstrap.min.css">
+  <link rel="stylesheet" type="text/css" href="styles/main.css">
+</head>
+<body ng-app="GiftCardApp">
+  <h1><a href="http://www.yahoo.com">Gift Card X-change</a></h1>
+  <nav class="navbar navbar-default">
+    <div class="container-fluid">
+      <ul class="nav navbar-nav">
+        <li class="active"><a href="#">User Profile</a></li>
+        <li><a href="#">Buy Cards</a></li>
+        <li><a href="#">Sell Cards</a></li> 
+        <li><a href="#/logout">Logout</a></li> 
+      </ul>
+    </div>
+  </nav>
+
+  <div class= "section" ng-view></div>
+
+  <script type="text/javascript" src="lib/bower_components/jquery/dist/jquery.min.js"></script>
+  <script type="text/javascript" src="lib/bower_components/bootstrap/dist/js/bootstrap.min.js"></script>
+  <script type="text/javascript" src="lib/bower_components/angular/angular.min.js"></script>
+  <script type="text/javascript" src="lib/bower_components/angular-route/angular-route.min.js"></script>
+  <script src="https://cdn.firebase.com/js/client/2.4.2/firebase.js"></script>
+  <script type="text/javascript" src="lib/bower_components/angularfire/dist/angularfire.min.js"></script>
+
+  <script type="text/javascript" src="app/app.js"></script>
+  <script type="text/javascript" src="app/factories/AuthFactory.js"></script>
+  <script type="text/javascript" src="app/factories/ItemFactory.js"></script>
+  <script type="text/javascript" src=app/Controllers/LoginCtrl.js></script>
+  <script type="text/javascript" src=app/Controllers/UserCtrl.js></script>
+
+
+</body>
+</html>

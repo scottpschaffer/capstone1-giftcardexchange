@@ -1,0 +1,34 @@
+{
+  "users":{
+    "user0":{
+      "name": "Scott Schaffer",
+      "address": "1066 Meandering Way",
+      "city": "Franklin",
+      "state": "Tennessee",
+      "zipcode": "37067",
+      "emailaddress": "a@b.com",
+      "sellhistory": "card0",
+      "buyhistory": "card1"
+    },
+    "user1":{
+      "name": "Eli Harrison",
+      "address": "432 Main Street",
+      "city": "Los Angeles",
+      "state": "California",
+      "zipcode": "87654",
+      "emailaddress": "b@c.com",
+      "sellhistory": "card1",
+      "buyhistory": "card0, card2"
+    },
+    "user2":{
+      "name": "Mike Anderson",
+      "address": "12 Flower Lane",
+      "city": "Smithtown",
+      "state": "New York",
+      "zipcode": "11767",
+      "emailaddress": "c@d.com",
+      "sellhistory": "card2",
+      "buyhistory": ""
+    }
+  }
+}

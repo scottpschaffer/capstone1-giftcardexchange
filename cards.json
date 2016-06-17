@@ -1,0 +1,34 @@
+{
+  "cards":{
+    "card0":{
+      "seller":"user0",
+      "buyer": "user1",
+      "merchant": "Red Robin",
+      "value": "$25",
+      "expirationdate": "July 2019",
+      "details": "It was a great card. It served me well.",
+      "isdone": true,
+      "questions": "question0,question1"
+    },
+    "card1":{
+      "seller":"user1",
+      "buyer": "user0",
+      "merchant": "Home Depot",
+      "value": "$50",
+      "expirationdate": "December 2025",
+      "details": "Who goes to the Home Depot anyway?",
+      "isdone": false,
+      "questions": "question2"
+    },
+    "card2":{
+      "seller":"user2",
+      "buyer": "user1",
+      "merchant": "Krispy Kreme",
+      "value": "$10",
+      "expirationdate": "August 2020",
+      "details": "I love doughnuts!",
+      "isdone": true,
+      "questions": "question3,question4"
+    }
+  }
+}

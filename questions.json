@@ -1,0 +1,29 @@
+{
+  "questions":{
+    "question0":{
+      "card": "card0",
+      "originator": "user1",
+      "text": "How did you get this?"
+    },
+    "question1":{
+      "card": "card0",
+      "originator": "user0",
+      "text": "It was a birthday gift."
+    },
+    "question2":{
+      "card": "card1",
+      "originator": "user0",
+      "text": "Can I buy paint with this?"
+    },
+    "question3":{
+      "card": "card2",
+      "originator": "user1",
+      "text": "Can I use this to buy coffee?"
+    },
+    "question4":{
+      "card": "card2",
+      "originator": "user2",
+      "text": "Yes you can"
+    }
+  }
+}
