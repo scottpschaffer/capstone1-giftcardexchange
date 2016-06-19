@@ -8,7 +8,8 @@
       "zipcode": "37067",
       "emailaddress": "a@b.com",
       "sellhistory": "card0",
-      "buyhistory": "card1"
+      "buyhistory": "card1",
+      "uid": "qaz123"
     },
     "user1":{
       "name": "Eli Harrison",
@@ -18,7 +19,8 @@
       "zipcode": "87654",
       "emailaddress": "b@c.com",
       "sellhistory": "card1",
-      "buyhistory": "card0, card2"
+      "buyhistory": "card0, card2",
+      "uid": "zaq321"
     },
     "user2":{
       "name": "Mike Anderson",
@@ -28,7 +30,8 @@
       "zipcode": "11767",
       "emailaddress": "c@d.com",
       "sellhistory": "card2",
-      "buyhistory": ""
+      "buyhistory": "",
+      "uid": mnb213
     }
   }
 }

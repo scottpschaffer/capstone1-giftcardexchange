@@ -13,7 +13,7 @@ app.controller("LoginCtrl", function($scope, $rootScope, $location, firebaseURL,
   // $scope.navBarShow = false;
 
   if($location.path() === "/logout"){
-    alert("ssssaaaaeeee");
+    // alert("ssssaaaaeeee");
     ref.unauth();
     $rootScope.isActive = false;
   }

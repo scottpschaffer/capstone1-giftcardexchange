@@ -1,25 +1,26 @@
 
 <div class="col-md-offset-5">
-  <input type="text" placeholder="Full Name">
+  <input type="text" placeholder="Full Name" ng-model="person.name">
 </div>
 <div class="col-md-offset-5">
-  <input type="text" placeholder="Street Address">
+  <input type="text" placeholder="Street Address" ng-model="person.streetAddress">
 </div>
 <div class="col-md-offset-5">
-  <input type="text" placeholder="City" class="col-md-3">
+  <input type="text" placeholder="City" class="col-md-3" ng-model="person.city">
 </div>
 <div>
-  <input type="text" placeholder="State" class="col-md-2">
+  <input type="text" placeholder="State" class="col-md-2" ng-model="person.state">
 </div>
 <div>
-  <input type="text" placeholder="ZIP Code" class="col-md-2">
+  <input type="text" placeholder="ZIP Code" class="col-md-2" ng-model="person.zipCode">
 </div>
 <div class="col-md-offset-5">
-  <input type="text" placeholder="E-mail Address" ng-model="emailAddress">
+  <input type="text" placeholder="E-mail Address" ng-model="person.emailAddress">
 </div>
-<div class="col-md-offset-5">
-  <button>Save</button>
-  <button>Cancel</button>
+  <div class="col-md-offset-5">
+  <!-- <a class="addMovie" ng-click ="addUser()"><i class="material-icons">Addd</i></a> -->
+  <button ng-click="addUser(person.id)">Save</button>
+  <button ng-click="getUser()">Cancel</button>
 </div>
 <hr>
 <div class="panel-group">

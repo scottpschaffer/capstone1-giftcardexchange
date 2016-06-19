@@ -20,20 +20,24 @@ app.config(function($routeProvider){
       controller: 'UserCtrl',
        resolve: {isAuth}
     }).
-    when('/movies/list',{
-      templateUrl: 'partials/movie-list.html',
-      controller: 'MovieListCtrl',
+    when('/sell',{
+      templateUrl: 'partials/sell-card.html',
+      controller: 'SellerCtrl',
        resolve: {isAuth}
      }).
-      when('/login', {
-        templateUrl: 'partials/login.html',
-        controller: "LoginCtrl"
-      
-      }).
-      when('/logout', {
-        templateUrl: 'partials/buy-card.html',
-        controller: "LoginCtrl"
-      }).
+    when('/buy',{
+      templateUrl: 'partials/buy-card.html',
+      controller: 'BuyerCtrl',
+       resolve: {isAuth}
+     }).
+    when('/login', {
+      templateUrl: 'partials/login.html',
+      controller: "LoginCtrl"
+    }).
+    when('/logout', {
+      templateUrl: 'partials/buy-card.html',
+      controller: "LoginCtrl"
+    }).
       otherwise('/');
 });
 

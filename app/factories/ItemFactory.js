@@ -49,6 +49,78 @@ var whoAmI = function(){
   console.log("EMAIL: ", email);
 }
 
+var getUser = function(){
+  let myUsers;
+  let user = AuthFactory.getUser();
+  return $q(function(resolve, reject){
+    $http.get(`${firebaseURL}users.json?orderBy="uid"&equalTo="${user.uid}"`)
+    // ?orderBy="uid"&equalTo="${user.uid}""
+      .success(function(movieObject){
+        // console.log("movieObject", movieObject);
+        var movieCollection = movieObject;
+        Object.keys(movieCollection).forEach(function(key){
+          movieCollection[key].id=key;
+          console.log("mio", movieCollection[key]);
+          myUsers = movieCollection[key]; // myUsers.push(movieCollection[key]);
+        })
+        console.log("movieCollection", movieCollection);
+        console.log("movieObject", movieObject);
+          resolve(myUsers);
+        }, function(error){
+          reject(error);
+        })
+  })};
+
+  var postNewUser = function(newUser) {
+    let user = AuthFactory.getUser();
+  console.log("qwerttreweq", newUser);
+  return $q(function(resolve, reject){
+    $http.post(
+        firebaseURL + "users.json",
+        JSON.stringify({
+          name: newUser.name,
+          streetAddress: newUser.streetAddress,
+          city: newUser.city,
+          state: newUser.state,
+          zipCode: newUser.zipCode,
+          emailAddress: newUser.emailAddress,
+          sellhistory: "none",
+          buyhistory: "none",
+          uid: user.uid
+        })
+      )
+        .success(
+          function(objectFromFirebase) {
+            console.log("objectFromFirebase", objectFromFirebase);
+            resolve(objectFromFirebase);
+          });
+  })
+}; 
+
+     var updateUser = function(theUser){
+        return $q(function(resolve, reject) {
+            $http.put(
+                firebaseURL + "users/" + theUser.id + ".json",
+                JSON.stringify({
+                    name: theUser.name,
+                    streetAddress: theUser.streetAddress,
+                    city: theUser.city,
+                    state: theUser.state,
+                    zipCode: theUser.zipCode,
+                    emailAddress: theUser.emailAddress,
+                    sellhistory: theUser.sellhistory,
+                    buyhistory: theUser.buyhistory,
+                    uid: theUser.uid
+                })
+            )
+            .success(
+                function(objectFromFirebase) {
+                    resolve(objectFromFirebase);
+                }
+            );
+        });
+    };
+
 
 var getMyMovieWatchList = function(){
       let myMovies = [];
@@ -99,5 +171,5 @@ var deleteMovie = function(movieId) {
         });
 };
 
-  return {whoAmI:whoAmI, getMovieList:getMovieList, postNewMovie:postNewMovie, getMyMovieWatchList:getMyMovieWatchList, deleteMovie:deleteMovie}
+  return {whoAmI:whoAmI, getUser:getUser, postNewUser:postNewUser, updateUser:updateUser, getMovieList:getMovieList, postNewMovie:postNewMovie, getMyMovieWatchList:getMyMovieWatchList, deleteMovie:deleteMovie}
 })

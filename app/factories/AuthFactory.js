@@ -3,6 +3,7 @@ app.factory("AuthFactory", function(firebaseURL) {
   let ref = new Firebase(firebaseURL);
   let currentUserData = null;
   let currentEmail = null;
+  let accountExists = false;
 
   return {
     /*
@@ -36,6 +37,7 @@ app.factory("AuthFactory", function(firebaseURL) {
             console.log("authWithPassword method completed successfully");
             currentUserData = authData;
             currentEmail = credentials.email;
+            // accountExists = true;
             resolve(authData);
           }
         });
