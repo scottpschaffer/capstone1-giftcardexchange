@@ -5,7 +5,7 @@ app.controller("UserCtrl", function($scope, $rootScope, $location, firebaseURL, 
   ItemFactory.whoAmI();
   $scope.person = {};
 
-  console.log("sssssssss");
+  // console.log("sssssssss");
 
   $scope.addUser = function(id) {
     // alert("ooo");

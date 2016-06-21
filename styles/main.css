@@ -1,2 +1,8 @@
 body {
   background-color: yellow; }
+
+.cardSales {
+  border: 3px solid black;
+  display: inline-block;
+  text-align: center;
+  margin: 5px; }

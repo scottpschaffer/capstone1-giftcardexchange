@@ -1,18 +1,28 @@
   <div class="col-md-offset-4">
-    <input type="text" placeholder="Card Merchant">
+    <input type="text" placeholder="Card Merchant" ng-model="card.merchant">
   </div>
   <div class="col-md-offset-4">
-    <input type="text" placeholder="Card Value">
-    <input type="text" placeholder="Expiration Date">
+    <input type="text" placeholder="Card Value" ng-model="card.value">
+    <input type="text" placeholder="Expiration Date" ng-model="card.expirationDate">
   </div>
   <div class="col-md-offset-4">
-    <textarea>Details</textarea>
+    <textarea ng-model="card.details">Details</textarea>
   </div>
   <div class="col-md-offset-4">
-    <button>Save</button>
-    <button>Cancel</button>
+    <button ng-click="sellCard(card.id)">Save</button>
+    <button ng-click="getAllCards()">Cancel</button>
   </div>
 
   <hr>
 
-  <div id="sellCards"></div>
+  <article class="cardSales" ng-repeat="card in cards">
+    <!-- <h2>{{card.seller}}</h2>
+    <h3>Qwert</h3> -->
+    <!-- <article class="cardSales"> -->
+      <header><button class="question" ng-click="message1(card.id)">QUESTION</button></header>
+      <p>{{card.merchant}}</p>
+      <p>{{card.value}}</p>
+      <p>{{card.isDone}}</p>
+      <footer><button>Edit</button><button>Delete</button></footer>
+    </article>
+  <!-- </div> -->
