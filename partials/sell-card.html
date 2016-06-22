@@ -9,8 +9,8 @@
     <textarea ng-model="card.details">Details</textarea>
   </div>
   <div class="col-md-offset-4">
-    <button ng-click="sellCard(card.id)">Save</button>
-    <button ng-click="getAllCards()">Cancel</button>
+    <button id="saveButton" ng-disabled="disable" ng-click="sellCard(card.id)">Save</button>
+    <button ng-click="cancelButton()">Cancel</button>
   </div>
 
   <hr>
@@ -19,10 +19,12 @@
     <!-- <h2>{{card.seller}}</h2>
     <h3>Qwert</h3> -->
     <!-- <article class="cardSales"> -->
-      <header><button class="question" ng-click="message1(card.id)">QUESTION</button></header>
-      <p>{{card.merchant}}</p>
-      <p>{{card.value}}</p>
-      <p>{{card.isDone}}</p>
-      <footer><button>Edit</button><button>Delete</button></footer>
+      <header><button class="question" ng-click="questionResponse(card.id)">QUESTION</button></header>
+      <section ng-click="getCard(card.id)">
+        <p>{{card.merchant}}</p>
+        <p>{{card.value}}</p>
+        <p>{{card.isDone}}</p>
+      </section>
+      <footer><button ng-click="editCard(card.id)">Edit</button><button ng-click="deleteCard(card.id)">Delete</button></footer>
     </article>
   <!-- </div> -->

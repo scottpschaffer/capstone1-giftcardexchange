@@ -171,6 +171,17 @@ var getUser = function(){
     });
   };
 
+  var getCard = function(theId){
+    return $q(function(resolve, reject){
+      $http.get(`${firebaseURL}cards/${theId}.json`)
+        .success(function(cardObject){
+          resolve(cardObject);
+        }, function(error){
+          reject(error);
+        })
+    })
+  };
+
   var getAllCards = function(){
     let myCards = [];
     let user = AuthFactory.getUser();
@@ -189,6 +200,16 @@ var getUser = function(){
           reject(error);
         })
     })
+  };
+
+  var deleteCard = function(theId) {
+    return $q(function(resolve, reject) {
+      $http
+        .delete(firebaseURL + "cards/" + theId + ".json")
+        .success(function(theResult) {
+          resolve(theResult);
+        });
+    });
   };
 
 // var getMyMovieWatchList = function(){
@@ -240,5 +261,5 @@ var getUser = function(){
 //         });
 // };
 
-  return {whoAmI:whoAmI, getUser:getUser, postNewUser:postNewUser, updateUser:updateUser, postNewCard:postNewCard, updateCard:updateCard, getAllCards:getAllCards}
+  return {whoAmI:whoAmI, getUser:getUser, postNewUser:postNewUser, updateUser:updateUser, postNewCard:postNewCard, updateCard:updateCard, getCard:getCard, getAllCards:getAllCards, deleteCard:deleteCard}
 })

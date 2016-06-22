@@ -3,50 +3,64 @@
 app.controller("SellerCtrl", function($scope, $rootScope, $location, firebaseURL, AuthFactory, ItemFactory){
   $scope.card = {};
   $scope.cards = [];
+  $scope.disable = false;
 
   $scope.sellCard = function(id){
     let newCard = $scope.card;
-    if (id){
-      ItemFactory.updateCard(newCard);
-    }else {
-      ItemFactory.postNewCard(newCard);
-      console.log("postNewCard");
-    }
+    // if (id){
+    //   ItemFactory.updateCard(newCard);
+    // }else {
+      ItemFactory.postNewCard(newCard).then(function(test){
+        console.log("test", test);
+        getAllCards();
+        $scope.card = {};
+      });
   };
 
-  $scope.getCard = function(){
-    ItemFactory.getCard().then(function(cardData){
+  $scope.getCard = function(id){
+    ItemFactory.getCard(id).then(function(cardData){
       if (cardData){
         $scope.card = cardData;
       }
+      $scope.disable = true;
+    });
+  };
+
+  $scope.editCard = function(id){
+    let newCard = $scope.card;
+    newCard.id = id;
+    console.log("newCard", newCard);
+    ItemFactory.updateCard(newCard).then(function(test){
+      $scope.disable = false;
+      getAllCards();
+      $scope.card = {};
     });
   }
 
   let getAllCards = function(){
-    alert("dddd");
+    // alert("dddd");
     ItemFactory.getAllCards().then(function(allCards){
       console.log("allCards", allCards);
-      // if(allCards){
-      //   $scope.card = allCards[0];
-        
-      // }
       $scope.cards = allCards;
     });
   };
 
   getAllCards();
 
-  $scope.getUser = function(){
-    console.log("wawa");
-    ItemFactory.getUser().then(function(userData){
-      console.log("GetUseruserData2", userData);
-      if (userData){
-        $scope.person = userData;      
-      }
+  $scope.deleteCard = function(id){
+    ItemFactory.deleteCard(id).then(function(test){
+      getAllCards();
+      $scope.card = {};
     });
   }
 
-  $scope.message1 = function(info){
+  $scope.cancelButton = function(){
+    $scope.disable = false;
+    getAllCards();
+    $scope.card = {};
+  }
+
+  $scope.questionResponse = function(info){
     console.log("info-wawa", info);
   }
 

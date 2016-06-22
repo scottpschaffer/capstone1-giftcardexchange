@@ -6,3 +6,6 @@ body {
   display: inline-block;
   text-align: center;
   margin: 5px; }
+
+p {
+  border: 3px dotted black; }
