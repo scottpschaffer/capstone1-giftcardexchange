@@ -35,7 +35,7 @@ app.config(function($routeProvider){
       controller: "LoginCtrl"
     }).
     when('/logout', {
-      templateUrl: 'partials/buy-card.html',
+      templateUrl: 'partials/login.html',
       controller: "LoginCtrl"
     }).
       otherwise('/');
