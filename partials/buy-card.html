@@ -1,6 +1,6 @@
 <div class="col-md-offset-2">
-  <input type="text" placeholder="Search For Cards">
-  <button>Search</button>
+  <label for="questionBuyer">Question for Seller:</label>
+  <input type="text" ng-model="questionBuyer" size="70" placeholder="Type your question here and press Question button of the card you want">
 </div>
 
 <hr>
@@ -23,7 +23,7 @@
 <div id="cards4Sale">
   <h2>Cards For Sale:</h2>
   <article class="cardSales" ng-repeat="card2 in cards">
-    <header><button class="question" ng-click="questionResponse(card2.id)">QUESTION</button></header>
+    <header><button class="question" ng-click="askQuestion(card2.id)">QUESTION</button></header>
     <section ng-click="getCard(card2.id)">
       <p>{{card2.merchant}}</p>
       <p>{{card2.value}}</p>

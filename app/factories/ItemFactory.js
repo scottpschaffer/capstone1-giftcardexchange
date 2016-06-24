@@ -243,5 +243,31 @@ var getUser = function(){
     })
   };
 
-  return {whoAmI:whoAmI, getUser:getUser, postNewUser:postNewUser, updateUser:updateUser, postNewCard:postNewCard, updateCard:updateCard, getCard:getCard, getAllCards:getAllCards, deleteCard:deleteCard, getCardsForSale:getCardsForSale, purchaseCard:purchaseCard, getMyCards:getMyCards}
+  var askQuestion = function(id, question){
+    let user = AuthFactory.getUser();
+    getCard(id).then(function(card){
+      if (card){
+        return $q(function(resolve, reject) {
+          $http.put(
+            firebaseURL + "questions.json",
+            JSON.stringify({
+              card: card.id,
+              seller: card.seller,
+              buyer: card.buyer,
+              originator: user.uid,
+              text: question,
+              read: false
+            })
+          )
+        .success(
+          function(objectFromFirebase) {
+            resolve(objectFromFirebase);
+          }
+        );
+        });
+      }
+    })
+  }
+
+  return {whoAmI:whoAmI, getUser:getUser, postNewUser:postNewUser, updateUser:updateUser, postNewCard:postNewCard, updateCard:updateCard, getCard:getCard, getAllCards:getAllCards, deleteCard:deleteCard, getCardsForSale:getCardsForSale, purchaseCard:purchaseCard, getMyCards:getMyCards, askQuestion:askQuestion}
 })
