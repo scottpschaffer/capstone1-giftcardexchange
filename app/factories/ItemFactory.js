@@ -245,29 +245,62 @@ var getUser = function(){
 
   var askQuestion = function(id, question){
     let user = AuthFactory.getUser();
+    let recipient = "";
+    let d = new Date();
     getCard(id).then(function(card){
       if (card){
+        if (user.uid === card.seller){
+          recipient = card.buyer;
+        }else{
+          recipient = card.seller;
+        }
         return $q(function(resolve, reject) {
-          $http.put(
+          $http.post(
             firebaseURL + "questions.json",
             JSON.stringify({
-              card: card.id,
-              seller: card.seller,
-              buyer: card.buyer,
+              card: id,
+              recipient: recipient,
               originator: user.uid,
               text: question,
-              read: false
+              read: false,
+              time: d.getTime()
             })
           )
         .success(
           function(objectFromFirebase) {
             resolve(objectFromFirebase);
-          }
+          });
+        }
         );
-        });
-      }
-    })
+      };
+    });
   }
+
+  // var postNewCard = function(newCard) {
+  //   let user = AuthFactory.getUser();
+    
+  //   return $q(function(resolve, reject){
+  //     $http.post(
+  //         firebaseURL + "cards.json",
+  //         JSON.stringify({
+  //           seller: user.uid,
+  //           buyer: "none",
+  //           merchant: newCard.merchant,
+  //           value: newCard.value,
+  //           expirationDate: newCard.expirationDate,
+  //           details: newCard.details,
+  //           isDone: "For Sale",
+  //           questions: "none"
+  //         })
+  //     )
+  //     .success(
+  //       function(objectFromFirebase) {
+  //         console.log("objectFromFirebase", objectFromFirebase);
+  //         resolve(objectFromFirebase);
+  //       }
+  //     );
+  //   });
+  // };
 
   return {whoAmI:whoAmI, getUser:getUser, postNewUser:postNewUser, updateUser:updateUser, postNewCard:postNewCard, updateCard:updateCard, getCard:getCard, getAllCards:getAllCards, deleteCard:deleteCard, getCardsForSale:getCardsForSale, purchaseCard:purchaseCard, getMyCards:getMyCards, askQuestion:askQuestion}
 })
