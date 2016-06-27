@@ -149,14 +149,16 @@ var getUser = function(){
       $http.get(`${firebaseURL}cards.json`)
         .success(function(cardObject){
           console.log("cardObject", cardObject);
-          var cardCollection = cardObject;
-          Object.keys(cardCollection).forEach(function(key){
-            cardCollection[key].id=key;
-            if (cardCollection[key].seller === user.uid){
-              myCards.push(cardCollection[key]);
-            }
-          });
-          console.log("myCards", myCards);
+          if (cardObject){
+            var cardCollection = cardObject;
+            Object.keys(cardCollection).forEach(function(key){
+              cardCollection[key].id=key;
+              if (cardCollection[key].seller === user.uid){
+                myCards.push(cardCollection[key]);
+              }
+            });
+          }
+          console.log("myCards-getAllCards", myCards);
           resolve(myCards);
         }, function(error){
           reject(error);
@@ -250,7 +252,7 @@ var getUser = function(){
     getCard(id).then(function(card){
       if (card){
         if (user.uid === card.seller){
-          recipient = card.buyer;
+          recipient = user.uid;
         }else{
           recipient = card.seller;
         }
@@ -275,6 +277,35 @@ var getUser = function(){
       };
     });
   }
+
+  var getMyQuestions = function(){
+    let myQuestions = [];
+    let user = AuthFactory.getUser();
+    return $q(function(resolve, reject){
+      $http.get(`${firebaseURL}questions.json`)
+        .success(function(questionObject){
+          console.log("questionObject", questionObject);
+          if (questionObject){
+            var questionCollection = questionObject;
+            Object.keys(questionCollection).forEach(function(key){
+              questionCollection[key].id=key;
+              console.log("questionCollection[key].originator", questionCollection[key].originator);
+              console.log("questionCollection[key].recipient", questionCollection[key].recipient);
+              if (questionCollection[key].recipient === user.uid){
+                myQuestions.push(questionCollection[key]);
+              }else{
+                console.log("questionCollection[key].recipient", questionCollection[key].recipient);
+              }
+
+            });
+          }
+          console.log("myCards-getAllCards", myQuestions);
+          resolve(myQuestions);
+        }, function(error){
+          reject(error);
+        })
+    })
+  };
 
   // var postNewCard = function(newCard) {
   //   let user = AuthFactory.getUser();
@@ -302,5 +333,5 @@ var getUser = function(){
   //   });
   // };
 
-  return {whoAmI:whoAmI, getUser:getUser, postNewUser:postNewUser, updateUser:updateUser, postNewCard:postNewCard, updateCard:updateCard, getCard:getCard, getAllCards:getAllCards, deleteCard:deleteCard, getCardsForSale:getCardsForSale, purchaseCard:purchaseCard, getMyCards:getMyCards, askQuestion:askQuestion}
+  return {whoAmI:whoAmI, getUser:getUser, postNewUser:postNewUser, updateUser:updateUser, postNewCard:postNewCard, updateCard:updateCard, getCard:getCard, getAllCards:getAllCards, deleteCard:deleteCard, getCardsForSale:getCardsForSale, purchaseCard:purchaseCard, getMyCards:getMyCards, askQuestion:askQuestion, getMyQuestions:getMyQuestions}
 })

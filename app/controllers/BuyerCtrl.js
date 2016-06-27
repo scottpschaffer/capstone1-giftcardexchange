@@ -38,6 +38,7 @@ app.controller("BuyerCtrl", function($scope, $rootScope, $location, firebaseURL,
   $scope.askQuestion = function(id){
     console.log("$scope.questionBuyer", $scope.questionBuyer);
     ItemFactory.askQuestion(id, $scope.questionBuyer);
+    $scope.questionBuyer = "";
   }
 
 });
