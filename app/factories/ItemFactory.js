@@ -5,9 +5,7 @@ app.factory("ItemFactory", function($q, $http, firebaseURL, AuthFactory){
 var whoAmI = function(){
   let user = AuthFactory.getUser();
   let email = AuthFactory.getEmail();
-  console.log("USER: ", user);
-  console.log("EMAIL: ", email);
-}
+};
 
 var getUser = function(){
   let myUsers;
@@ -18,21 +16,18 @@ var getUser = function(){
         var movieCollection = movieObject;
         Object.keys(movieCollection).forEach(function(key){
           movieCollection[key].id=key;
-          console.log("mio", movieCollection[key]);
           myUsers = movieCollection[key];
-        })
-        console.log("movieCollection", movieCollection);
-        console.log("movieObject", movieObject);
+        });
           resolve(myUsers);
         }, function(error){
           reject(error);
-        })
-  })};
+        });
+  });
+};
 
 
   var postNewUser = function(newUser) {
     let user = AuthFactory.getUser();
-    console.log("qwerttreweq", newUser);
     return $q(function(resolve, reject){
       $http.post(
         firebaseURL + "users.json",
@@ -50,10 +45,9 @@ var getUser = function(){
       )
         .success(
           function(objectFromFirebase) {
-            console.log("objectFromFirebase", objectFromFirebase);
             resolve(objectFromFirebase);
           });
-    })
+    });
   }; 
 
   var updateUser = function(theUser){
@@ -99,7 +93,6 @@ var getUser = function(){
       )
       .success(
         function(objectFromFirebase) {
-          console.log("objectFromFirebase", objectFromFirebase);
           resolve(objectFromFirebase);
         }
       );
@@ -138,8 +131,8 @@ var getUser = function(){
           resolve(cardObject);
         }, function(error){
           reject(error);
-        })
-    })
+        });
+    });
   };
 
   var getAllCards = function(){
@@ -148,7 +141,6 @@ var getUser = function(){
     return $q(function(resolve, reject){
       $http.get(`${firebaseURL}cards.json`)
         .success(function(cardObject){
-          console.log("cardObject", cardObject);
           if (cardObject){
             var cardCollection = cardObject;
             Object.keys(cardCollection).forEach(function(key){
@@ -158,12 +150,11 @@ var getUser = function(){
               }
             });
           }
-          console.log("myCards-getAllCards", myCards);
           resolve(myCards);
         }, function(error){
           reject(error);
-        })
-    })
+        });
+    });
   };
 
   var deleteCard = function(theId) {
@@ -182,20 +173,18 @@ var getUser = function(){
     return $q(function(resolve, reject){
       $http.get(`${firebaseURL}cards.json`)
         .success(function(cardObject){
-          console.log("cardObject-lulu", cardObject);
           var cardCollection = cardObject;
           Object.keys(cardCollection).forEach(function(key){
             cardCollection[key].id=key;
             if (cardCollection[key].buyer === "none"){
               myCards.push(cardCollection[key]);
             }
-          })
-          console.log("myCards-lulu", myCards);
+          });
           resolve(myCards);
         }, function(error){
           reject(error);
-        })
-    })
+        });
+    });
   };
 
   var purchaseCard = function(theCard){
@@ -229,30 +218,28 @@ var getUser = function(){
     return $q(function(resolve, reject){
       $http.get(`${firebaseURL}cards.json`)
         .success(function(cardObject){
-          console.log("cardObject-lulu", cardObject);
           var cardCollection = cardObject;
           Object.keys(cardCollection).forEach(function(key){
             cardCollection[key].id=key;
             if (cardCollection[key].buyer === user.uid){
               myCards.push(cardCollection[key]);
             }
-          })
-          console.log("myCards-lulu", myCards);
+          });
           resolve(myCards);
         }, function(error){
           reject(error);
-        })
-    })
+        });
+    });
   };
 
-  var askQuestion = function(id, question){
+  var askQuestion = function(id, question, prospect){
     let user = AuthFactory.getUser();
     let recipient = "";
     let d = new Date();
     getCard(id).then(function(card){
       if (card){
         if (user.uid === card.seller){
-          recipient = user.uid;
+          recipient = prospect;
         }else{
           recipient = card.seller;
         }
@@ -274,9 +261,9 @@ var getUser = function(){
           });
         }
         );
-      };
+      }
     });
-  }
+  };
 
   var getMyQuestions = function(){
     let myQuestions = [];
@@ -284,54 +271,33 @@ var getUser = function(){
     return $q(function(resolve, reject){
       $http.get(`${firebaseURL}questions.json`)
         .success(function(questionObject){
-          console.log("questionObject", questionObject);
           if (questionObject){
             var questionCollection = questionObject;
             Object.keys(questionCollection).forEach(function(key){
               questionCollection[key].id=key;
-              console.log("questionCollection[key].originator", questionCollection[key].originator);
-              console.log("questionCollection[key].recipient", questionCollection[key].recipient);
               if (questionCollection[key].recipient === user.uid){
                 myQuestions.push(questionCollection[key]);
               }else{
-                console.log("questionCollection[key].recipient", questionCollection[key].recipient);
               }
 
             });
           }
-          console.log("myCards-getAllCards", myQuestions);
           resolve(myQuestions);
         }, function(error){
           reject(error);
-        })
-    })
+        });
+    });
   };
 
-  // var postNewCard = function(newCard) {
-  //   let user = AuthFactory.getUser();
-    
-  //   return $q(function(resolve, reject){
-  //     $http.post(
-  //         firebaseURL + "cards.json",
-  //         JSON.stringify({
-  //           seller: user.uid,
-  //           buyer: "none",
-  //           merchant: newCard.merchant,
-  //           value: newCard.value,
-  //           expirationDate: newCard.expirationDate,
-  //           details: newCard.details,
-  //           isDone: "For Sale",
-  //           questions: "none"
-  //         })
-  //     )
-  //     .success(
-  //       function(objectFromFirebase) {
-  //         console.log("objectFromFirebase", objectFromFirebase);
-  //         resolve(objectFromFirebase);
-  //       }
-  //     );
-  //   });
-  // };
+  var deleteQuestion = function(questionId){
+      return $q(function(resolve, reject){
+        $http
+          .delete(firebaseURL + "questions/" + questionId + ".json")
+          .success(function(objectFromFirebase){
+            resolve(objectFromFirebase);
+          });
+      });
+    };
 
-  return {whoAmI:whoAmI, getUser:getUser, postNewUser:postNewUser, updateUser:updateUser, postNewCard:postNewCard, updateCard:updateCard, getCard:getCard, getAllCards:getAllCards, deleteCard:deleteCard, getCardsForSale:getCardsForSale, purchaseCard:purchaseCard, getMyCards:getMyCards, askQuestion:askQuestion, getMyQuestions:getMyQuestions}
-})
+  return {whoAmI:whoAmI, getUser:getUser, postNewUser:postNewUser, updateUser:updateUser, postNewCard:postNewCard, updateCard:updateCard, getCard:getCard, getAllCards:getAllCards, deleteCard:deleteCard, getCardsForSale:getCardsForSale, purchaseCard:purchaseCard, getMyCards:getMyCards, askQuestion:askQuestion, getMyQuestions:getMyQuestions, deleteQuestion:deleteQuestion};
+});

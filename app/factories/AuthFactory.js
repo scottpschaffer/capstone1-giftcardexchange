@@ -32,12 +32,9 @@ app.factory("AuthFactory", function(firebaseURL) {
         }, (error, authData) => {
           if (error) {
             reject(error);
-            console.log("ERROR with Authenticate", error);
           } else {
-            console.log("authWithPassword method completed successfully");
             currentUserData = authData;
             currentEmail = credentials.email;
-            // accountExists = true;
             resolve(authData);
           }
         });

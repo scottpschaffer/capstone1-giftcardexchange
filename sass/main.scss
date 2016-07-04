@@ -1,5 +1,8 @@
 body {
   background-color: yellow;
+  background-image: url(/images/tips-for-paying-off-credit-card-debt.jpg);
+  background-size: contain;
+  background-repeat: repeat-x;
 }
 
 .cardSales {
@@ -11,4 +14,17 @@ body {
 
 p {
   border: 3px dotted black;
+}
+
+label {
+  color: red;
+  margin-left: 30px;
+}
+
+input {
+  margin-bottom: 20px;
+}
+
+h1 {
+  color: red;
 }

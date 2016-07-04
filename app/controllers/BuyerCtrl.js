@@ -6,7 +6,6 @@ app.controller("BuyerCtrl", function($scope, $rootScope, $location, firebaseURL,
   
   let getCardsForSale = function(){
     ItemFactory.getCardsForSale().then(function(allCards){
-      console.log("allCards", allCards);
       $scope.cards = allCards;
     });
   };
@@ -15,7 +14,6 @@ app.controller("BuyerCtrl", function($scope, $rootScope, $location, firebaseURL,
 
   let getMyCards = function(){
     ItemFactory.getMyCards().then(function(allMyCards){
-      console.log("allMyCards", allMyCards);
       $scope.cardz = allMyCards;
     });
   };
@@ -23,22 +21,19 @@ app.controller("BuyerCtrl", function($scope, $rootScope, $location, firebaseURL,
   getMyCards();
 
   $scope.detailsAlert = function(details){
-    console.log("detai", details);
     alert(details);
   };
 
   $scope.buyCard = function(theCard){
     ItemFactory.purchaseCard(theCard).then(function(purchase){
-      console.log("purchase", purchase);
       getCardsForSale();
       getMyCards();
     });
   };
 
   $scope.askQuestion = function(id){
-    console.log("$scope.questionBuyer", $scope.questionBuyer);
-    ItemFactory.askQuestion(id, $scope.questionBuyer);
+    ItemFactory.askQuestion(id, $scope.questionBuyer, "none");
     $scope.questionBuyer = "";
-  }
+  };
 
 });
