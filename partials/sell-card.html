@@ -1,10 +1,30 @@
+<div class="row">
   <div class="col-md-offset-4">
-    <input type="text" placeholder="Card Merchant" ng-model="card.merchant">
+    <label>MERCHANT</label>
   </div>
+</div>
+<div class="row">
+  <div class="col-md-offset-4">
+    <input type="text" class="col-md-3" placeholder="Card Merchant" ng-model="card.merchant">
+  </div>
+</div>
+<div class="row">
+  <div class="col-md-offset-4">
+    <label>CARD VALUE</label>
+    <label>EXP DATE</label>
+  </div>
+</div>
+<div class="row">
   <div class="col-md-offset-4">
     <input type="text" placeholder="Card Value" ng-model="card.value">
     <input type="text" placeholder="Expiration Date" ng-model="card.expirationDate">
   </div>
+</div>
+<div class="row">
+  <div class="col-md-offset-4">
+    <label>CARD DETAILS</label>
+  </div>
+</div>
   <div class="col-md-offset-4">
     <textarea ng-model="card.details">Details</textarea>
   </div>
@@ -14,6 +34,7 @@
   </div>
 
   <hr>
+<h3>Cards I'm Selling:</h3>
 
   <article class="cardSales" ng-repeat="card in cards">
     <header><button class="question" ng-click="questionResponse(card.id)">QUESTION</button></header>
