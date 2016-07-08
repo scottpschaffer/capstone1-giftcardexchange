@@ -7,11 +7,15 @@ var whoAmI = function(){
   let email = AuthFactory.getEmail();
 };
 
-var getUser = function(){
+var getUser = function(userName){
   let myUsers;
   let user = AuthFactory.getUser();
+  if (userName === "none"){
+    userName=user.uid;
+    console.log("user.uid", user.uid);
+  }
   return $q(function(resolve, reject){
-    $http.get(`${firebaseURL}users.json?orderBy="uid"&equalTo="${user.uid}"`)
+    $http.get(`${firebaseURL}users.json?orderBy="uid"&equalTo="${userName}"`)
       .success(function(movieObject){
         var movieCollection = movieObject;
         Object.keys(movieCollection).forEach(function(key){

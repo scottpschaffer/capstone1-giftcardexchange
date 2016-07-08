@@ -19,7 +19,7 @@ app.controller("UserCtrl", function($scope, $rootScope, $location, firebaseURL, 
   }; 
 
   $scope.getUser = function(){
-    ItemFactory.getUser().then(function(userData){
+    ItemFactory.getUser("none").then(function(userData){
       if (userData){
         $scope.person = userData;      
       }
@@ -30,6 +30,18 @@ app.controller("UserCtrl", function($scope, $rootScope, $location, firebaseURL, 
 
   let getAllMyQuestions = function(){
     ItemFactory.getMyQuestions().then(function(myQuestions){
+      console.log("myQuestions", myQuestions);
+      for (let x=0; x<myQuestions.length; x++){
+        ItemFactory.getUser(myQuestions[x].originator).then(function(getName){
+          myQuestions[x].name = getName.name;
+          console.log("getName.name", getName.name);
+        });
+        ItemFactory.getCard(myQuestions[x].card).then(function(getMerchant){
+          myQuestions[x].merchant = getMerchant.merchant;
+          console.log("getMerchant.merchant", getMerchant.merchant);
+        });
+      }
+      console.log("myQuestions2", myQuestions);
       $scope.myQuestions = myQuestions;
     });
   };
@@ -42,5 +54,11 @@ app.controller("UserCtrl", function($scope, $rootScope, $location, firebaseURL, 
       getAllMyQuestions();
     });    
   };
+
+  $scope.deleteQuestion = function(qid){
+    ItemFactory.deleteQuestion(qid).then(function(byeQuestion){
+      getAllMyQuestions();
+    });
+  }
 
 });

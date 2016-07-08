@@ -47,13 +47,14 @@
 <h3>Questions For Me:</h3>
 <div>
   <article class="cardQuestions" ng-repeat="question in myQuestions">
-    <header>QUESTION</header>
+    <header>QUESTION from {{question.name}} regarding {{question.merchant}} card</header>
     <section>
       <p>{{question.text}}</p>
     </section>
     <footer>
       <input type="text" class="col-md-3" name="reply" placeholder="Enter Reply To Question" ng-model="questionReply">
       <button ng-click="newResponse(question.id, question.card, questionReply, question.originator)">Submit</button>
+      <button ng-click="deleteQuestion(question.id)">Delete</button>
     </footer>
   </article>
 </div>

@@ -1,7 +1,7 @@
-.section {
+.background1 {
   background-color: #bf8040;
   background-image: url(/images/tips-for-paying-off-credit-card-debt.jpg);
-  background-size: contain;
+  background-size: 100vh;
   background-repeat: repeat-x; }
 
 .cardSales {
